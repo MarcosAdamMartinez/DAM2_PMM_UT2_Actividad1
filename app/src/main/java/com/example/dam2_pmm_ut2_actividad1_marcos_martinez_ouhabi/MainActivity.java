@@ -31,14 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void mandarEmail(View view){
 
-        String direccion = String.valueOf(findViewById(R.id.recipiente));
-        String asunto = String.valueOf(findViewById(R.id.asunto));
-        String mensaje = String.valueOf(findViewById(R.id.mensaje));
+        EditText direccionT = findViewById(R.id.recipiente);
+        String direccion = direccionT.getText().toString();
+        EditText asuntoT = findViewById(R.id.asunto);
+        String asunto = asuntoT.getText().toString();
+        EditText mensajeT = findViewById(R.id.mensaje);
+        String mensaje = mensajeT.getText().toString();
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:"+direccion));
-        intent.putExtra(Intent.EXTRA_SUBJECT,asunto);
-        intent.putExtra(Intent.EXTRA_TEXT,mensaje);
+        intent.setData(Uri.parse("mailto:" + direccion +
+                        "?subject=" + Uri.encode(asunto) +
+                        "&body=" + Uri.encode(mensaje)));
         startActivity(intent);
     }
 
